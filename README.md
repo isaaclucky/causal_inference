@@ -14,7 +14,8 @@
 
 
 
-<img src="images/tech_stack.png" name="">
+<img src="images/causality_home.jpeg" name="">
+<p> <a href="https://www.datasciencecentral.com/causality-the-next-most-important-thing-in-ai-ml/"> Image Source</a> </p>
 <br />
 <p align="center">
   <h3 align="center">Causal Inference: Application in Logistic Optimization</h3>
@@ -24,6 +25,14 @@
     <li>
     <b>Causal inference</b> refers to an intellectual discipline that considers the assumptions, study designs, and estimation strategies that allow researchers to draw causal conclusions based on data.
     </li>
+    <li>
+      A variable <b>X</b>, can be said to cause another variable <b>Y</b>, if when all confounders are adjusted, an intervention in <b>X</b> results in a change in <b>Y</b>, but an intervention in <b>Y</b> does not necessarily result in a change in <b>X</b>. 
+    </li>
+    <li>
+      This can be seen from the following picture by <a href="https://towardsdatascience.com/causality-an-introduction-f8a3f6ac4c4a">Shawhin Talebi</a>.
+    <img src="images/causality.gif" name="causality_picture">
+    </li>
+    
 
   </ul>
     <br />
