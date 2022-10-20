@@ -1,0 +1,4 @@
+[core]
+    remote = w9-storage
+['remote "w9-storage"']
+    url = /tmp/dvc-w9-storage
