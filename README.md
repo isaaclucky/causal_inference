@@ -1,7 +1,5 @@
-# Causal_Inference
-
+<div align="center">
 <h1 align="center">Logistic Optimization using Causal Inference</h1>
-<div>
 <a href="https://github.com/isaaclucky/causal_inference/network/members"><img src="https://img.shields.io/github/forks/isaaclucky/causal_inference" alt="Forks Badge"/></a>
 <a href="https://github.com/isaaclucky/causal_inference/pulls"><img src="https://img.shields.io/github/issues-pr/isaaclucky/causal_inference" alt="Pull Requests Badge"/></a>
 <a href="https://github.com/isaaclucky/causal_inference/issues"><img src="https://img.shields.io/github/issues/isaaclucky/causal_inference" alt="Issues Badge"/></a>
@@ -13,10 +11,11 @@
 </br>
 
 
-
+<div align="center">
 <img src="images/causality_home.jpeg" name="">
-<p> <a href="https://www.datasciencecentral.com/causality-the-next-most-important-thing-in-ai-ml/"> Image Source</a> </p>
+<p> <a href="https://www.datasciencecentral.com/causality-the-next-most-important-thing-in-ai-ml/">source</a> </p>
 <br />
+</div>  
 <p align="center">
   <h3 align="center">Causal Inference: Application in Logistic Optimization</h3>
 
