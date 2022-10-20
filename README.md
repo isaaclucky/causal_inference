@@ -47,6 +47,7 @@
     * [images](#images)
     * [notebooks](#notebooks)
     * [scripts](#scripts)
+    * [tests](#tests)
     * [root folder](#root-folder)
   - [Getting Started](#getting-started)
     * [Prerequests](*prerequests)
@@ -73,6 +74,9 @@
 ### .github:
 
 - `.github/`: the folder where github actions and CML workflow is integrated.
+  
+### tests:
+- `tests/`: the folder where unit testing modules can be found.
 
 
 ### root folder
