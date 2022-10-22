@@ -133,7 +133,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 - GitHub: [Yishak Tadele](https://github.com/isaaclucky)
 - LinkedIn: [Yishak Tadele](https://www.linkedin.com/in/yishak-tadele/)
-- Email:[Yishak Tadele](isaaclucky88@gmail.com)
+- Email:[Yishak Tadele](mailto:isaaclucky88@gmail.com)
 
 
 <!-- ACKNOWLEDGEMENTS -->
