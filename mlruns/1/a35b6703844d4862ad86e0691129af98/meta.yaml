@@ -1,0 +1,15 @@
+artifact_uri: file:///home/owon/Documents/10x/week9/causal_inference/mlruns/1/a35b6703844d4862ad86e0691129af98/artifacts
+end_time: 1666452035538
+entry_point_name: ''
+experiment_id: '1'
+lifecycle_stage: active
+run_id: a35b6703844d4862ad86e0691129af98
+run_name: mysterious-fowl-133
+run_uuid: a35b6703844d4862ad86e0691129af98
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1666452033755
+status: 3
+tags: []
+user_id: owon

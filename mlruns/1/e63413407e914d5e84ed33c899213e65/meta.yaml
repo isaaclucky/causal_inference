@@ -1,0 +1,15 @@
+artifact_uri: file:///home/owon/Documents/10x/week9/causal_inference/mlruns/1/e63413407e914d5e84ed33c899213e65/artifacts
+end_time: 1666452076222
+entry_point_name: ''
+experiment_id: '1'
+lifecycle_stage: active
+run_id: e63413407e914d5e84ed33c899213e65
+run_name: resilient-hare-199
+run_uuid: e63413407e914d5e84ed33c899213e65
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1666452074608
+status: 3
+tags: []
+user_id: owon
