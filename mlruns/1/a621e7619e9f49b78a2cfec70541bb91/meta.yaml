@@ -1,0 +1,15 @@
+artifact_uri: file:///home/owon/Documents/10x/week9/causal_inference/mlruns/1/a621e7619e9f49b78a2cfec70541bb91/artifacts
+end_time: 1666451984260
+entry_point_name: ''
+experiment_id: '1'
+lifecycle_stage: active
+run_id: a621e7619e9f49b78a2cfec70541bb91
+run_name: likeable-doe-832
+run_uuid: a621e7619e9f49b78a2cfec70541bb91
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1666451982669
+status: 3
+tags: []
+user_id: owon

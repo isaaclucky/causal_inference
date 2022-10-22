@@ -1,0 +1,15 @@
+artifact_uri: file:///home/owon/Documents/10x/week9/causal_inference/mlruns/1/9b43fce301884b43bfc2013e28543996/artifacts
+end_time: 1666452110793
+entry_point_name: ''
+experiment_id: '1'
+lifecycle_stage: active
+run_id: 9b43fce301884b43bfc2013e28543996
+run_name: persistent-foal-140
+run_uuid: 9b43fce301884b43bfc2013e28543996
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1666452109207
+status: 3
+tags: []
+user_id: owon

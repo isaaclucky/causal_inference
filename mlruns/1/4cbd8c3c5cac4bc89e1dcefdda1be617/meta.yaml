@@ -1,0 +1,15 @@
+artifact_uri: file:///home/owon/Documents/10x/week9/causal_inference/mlruns/1/4cbd8c3c5cac4bc89e1dcefdda1be617/artifacts
+end_time: 1666452067096
+entry_point_name: ''
+experiment_id: '1'
+lifecycle_stage: active
+run_id: 4cbd8c3c5cac4bc89e1dcefdda1be617
+run_name: gifted-bass-893
+run_uuid: 4cbd8c3c5cac4bc89e1dcefdda1be617
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1666452065545
+status: 3
+tags: []
+user_id: owon
