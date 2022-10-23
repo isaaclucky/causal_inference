@@ -4,30 +4,10 @@ from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 from sklearn.preprocessing import MinMaxScaler, StandardScaler, Normalizer
 from log_supp import App_Logger
 from geopy.distance import great_circle as GRC
-
-app_logger = App_Logger("../logs/data_cleaner.log").get_app_logger()
-
-
-from pandas.tseries.holiday import *
 from pandas.tseries.offsets import CustomBusinessDay
-
-class NigeriaCalendar(AbstractHolidayCalendar):
-   rules = [
-     Holiday('New Year', month=1, day=1, observance=sunday_to_monday),
-     Holiday('Good Friday', month=4, day=2, observance=sunday_to_monday),
-     Holiday('Easter Monday', month=4, day=5, observance=sunday_to_monday),
-     Holiday('Workers Day', month=5, day=1,observance=sunday_to_monday),
-     Holiday('Eid-el-fitri Sallah Holiday', month=5, day=12),
-     Holiday('Democracy Day', month=6, day=14, observance=sunday_to_monday),
-     Holiday('Id el Kabir', month=7, day=20, observance=nearest_workday),
-     Holiday('Id el Kabir Holiday', month=7, day=21, observance=sunday_to_monday),
-     Holiday('Independence Day', month=10, day=1, observance=sunday_to_monday),
-     Holiday('Eidul-Mawlid', month=10, day=19, observance=nearest_workday),
-     Holiday('Christmas Day', month=12, day=25, observance=nearest_workday),
-     Holiday('Boxing Day', month=12, day=26),
-     Holiday('Christmas Day', month=12, day=27, observance=nearest_workday),
-     Holiday('Boxing Day', month=12, day=28)
-   ]
+from pandas.tseries.holiday import *
+from custom_calendar import NigeriaCalendar
+app_logger = App_Logger("../logs/data_cleaner.log").get_app_logger()
 
 
 
@@ -58,11 +38,11 @@ class Clean_df:
         """
         return self.df.select_dtypes(include='number').columns
 
-    def drop_null_entries(self) -> pd.DataFrame:
+    def drop_null_entries(self, subset=['trip_start_time']) -> pd.DataFrame:
         """
         Checks if there is a null entry in the dataset and removes them
         """
-        self.df.dropna(subset=self.df.columns, axis=0, inplace=True)
+        self.df.dropna(subset=subset, axis=0, inplace=True)
         return self.df
 
     def convert_to_datetime(self, column: str) -> pd.DataFrame:
@@ -120,27 +100,26 @@ class Clean_df:
 
     def compute_holidays(self, column='isHoliday'):
         NC = CustomBusinessDay(calendar=NigeriaCalendar())
-        total = pd.date_range(start=self.df.trip_start_time.dt.date.unique().min(), end=self.df.trip_start_time.dt.date.unique().max())
-        working = pd.date_range(start=self.df.trip_start_time.dt.date.unique().min(), end=self.df.trip_start_time.dt.date.unique().max(), freq=NC)
+        total = pd.date_range(start=self.df.trip_start_time.dt.date.unique(
+        ).min(), end=self.df.trip_start_time.dt.date.unique().max())
+
+        working = pd.date_range(start=self.df.trip_start_time.dt.date.unique().min(),
+                                end=self.df.trip_start_time.dt.date.unique().max(), freq=NC)
         # df = pd.DataFrame(s, columns=['Date'])
         holiday = set(total.date)-set(working.date)
-        df[column] = self.df.trip_start_time.dt.date.isin(holiday)*1
+
+        self.df[column] = self.df.trip_start_time.dt.date.isin(holiday)*1
 
         return self.df
-    
-    def compute_proximity(self):
-        # use the merged dataset
-        self.df['driver_proximity'] = self.df.apply(lambda row: GRC( (row['lat'], row['lng']),(row['origin_lat'], row['origin_lon'])).m, axis=1)
-        
-        return self.df
-        
+
+
 
     def map_days(self, date_col):
         # Reshaping the time stamp representations
-        self.df['Year'] = self.df[date_col].dt.year
-        self.df['Month'] = self.df[date_col].dt.month
-        self.df['IsWeekDay'] = (self.df.Date.dt.day_of_week < 5)*1
-        self.df['Dayhour'] = self.df[date_col].dt.hour
+        self.df['year'] = self.df[date_col].dt.year
+        self.df['month'] = self.df[date_col].dt.month
+        self.df['isWeekDay'] = (self.df[date_col].dt.day_of_week < 5)*1
+        self.df['hour'] = self.df[date_col].dt.hour
 
         return self.df
 
@@ -151,6 +130,7 @@ class Clean_df:
         for i in range(len(cols)):
             df_new[cols[i]] = self.df.iloc[:, i]
         self.df = df_new
+
         return self.df
 
     def split_date_cols(self):
@@ -160,37 +140,45 @@ class Clean_df:
         self.df['origin_lon'] = origin[1]
         self.df['dest_lat'] = dest[0]
         self.df['dest_lon'] = dest[1]
-        self.df.drop(columns=['trip_origin','trip_destination'],inplace=True)
-        return self.df
-    
-    def cast_location(self):
-        self.df.dest_lat=self.df.dest_lat.astype(float)
-        self.df.dest_lon=self.df.dest_lon.astype(float)
-        self.df.origin_lat=self.df.origin_lat.astype(float)
-        self.df.origin_lon=self.df.origin_lon.astype(float)
+        self.df.drop(columns=['trip_origin', 'trip_destination'], inplace=True)
         return self.df
 
-    def convert_to_datetime(self, column: str) -> pd.DataFrame:
+    def cast_location(self):
+        self.df.dest_lat = self.df.dest_lat.astype(float)
+        self.df.dest_lon = self.df.dest_lon.astype(float)
+        self.df.origin_lat = self.df.origin_lat.astype(float)
+        self.df.origin_lon = self.df.origin_lon.astype(float)
+
+        return self.df
+
+    def convert_to_datetime(self) -> pd.DataFrame:
         """Convert column to datetime."""
         try:
 
-            self.df[column] = pd.to_datetime(self.df[column])
+            self.df['trip_start_time'] = pd.to_datetime(self.df['trip_start_time'])
+            self.df['trip_end_time'] = pd.to_datetime(self.df['trip_end_time'])
             return self.df
         except Exception:
             self.logger.exception(
                 'Failed to convert Column to Datetime')
             sys.exit(1)
 
-    def compute_abs_distance(self,origin_lat='origin_lat',origin_lon='origin_lon',dest_lat='dest_lat',dest_lon='dest_lon',name='distance'):
-        self.df[name] = self.df.apply(lambda row: GRC((row[origin_lat], row[origin_lon]), (row[dest_lat], row[dest_lon])).m, axis=1)
-        
+    def compute_abs_distance(self, origin_lat='origin_lat', origin_lon='origin_lon', dest_lat='dest_lat', dest_lon='dest_lon', name='distance'):
+        self.df[name] = self.df.apply(lambda row: GRC(
+            (row[origin_lat], row[origin_lon]), (row[dest_lat], row[dest_lon])).m, axis=1)
+
         return self.df
-    
+
+    def compute_avg_speed(self):
+        self.df['speed'] = self.df['distance'] / self.df['duration']
+        return self.df
+
     def duration_seconds(self):
-        self.df['duration'] = (self.df['trip_end_time'] - self.df['trip_start_time']).dt.total_seconds()
-        
+        self.df['duration'] = (self.df['trip_end_time'] -
+                               self.df['trip_start_time']).dt.total_seconds()
+
         return self.df
-    
+
     def minmax_scaling(self) -> pd.DataFrame:
         """
         Returns dataframe with minmax scaled columns
@@ -201,8 +189,6 @@ class Clean_df:
                 self.df[self.get_numerical_columns(self.df)]), columns=self.get_numerical_columns(self.df)
         )
         return res
-
-
 
     def join_dataframes(self, df1, df2, on, how="inner"):
         """Join the two dataframes."""
@@ -273,12 +259,17 @@ class Clean_df:
         """
         performs a pipiline of cleaning methods in the given dataframe
         """
-        unwanted_cols = ['created_at', 'updated_at']
-        self.drop_unwanted_cols(unwanted_cols)
-        self.drop_null_entries()
+        
+        self.rename_cols()
         self.drop_duplicate()
-        self.compute_holidays_gap('Date')
-        self.convert_to_datetime('Date')
-        self.map_days()
-        self.drop_unwanted_cols(unwanted_cols)
+        self.drop_null_entries()
+        self.split_date_cols()
+        self.cast_location()
+        self.compute_abs_distance()
+        self.convert_to_datetime()
+        self.map_days('trip_start_time')
+        self.duration_seconds()
+        self.compute_holidays()
+        self.compute_avg_speed()
+
         return self.df
