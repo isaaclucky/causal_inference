@@ -1,0 +1,27 @@
+name: publish_model_results
+on: [push]
+jobs:
+  run:
+    permissions: write-all
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: iterative/setup-cml@v1
+      - name: install
+        run: |
+          # Your ML workflow goes here
+          pip install -r requirements.txt
+      - name: Write CML report
+        env:
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "### Random Forest Result" > report.md
+          cat results/RandomForest_results_24-10-2022_11:08:57.txt >> report.md
+          echo "-----------------------------------" > report.md
+          echo "### Decision Tree Result" > report.md
+          cat results/DecisionTree_results_24-10-2022_11:08:39.txt >> report.md
+          echo "-----------------------------------" > report.md
+          echo "### Logistic Regression Result" > report.md
+          cat results/LogisticRegression_results_24-10-2022_11:08:10.txt > report.md
+          
+          cml-send-comment report.md
