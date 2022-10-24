@@ -17,10 +17,9 @@ jobs:
         run: |
           echo "### Random Forest Result" > report.md
           cat results/RandomForest_results_24-10-2022_11:08:57.txt >> report.md
-          echo "-----------------------------------" > report.md
-          echo "### Decision Tree Result" > report.md
+          echo  > report.md
           cat results/DecisionTree_results_24-10-2022_11:08:39.txt >> report.md
-          echo "-----------------------------------" > report.md
+          echo  > report.md
           echo "### Logistic Regression Result" > report.md
           cat results/LogisticRegression_results_24-10-2022_11:08:10.txt > report.md
           
