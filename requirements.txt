@@ -1,2 +1,2 @@
-geopy
+pandas
 mlflow
