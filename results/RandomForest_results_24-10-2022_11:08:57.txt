@@ -1,6 +1,3 @@
-fit_time:[3.04029584 3.30092096 3.11404705 3.1377573  3.03436422]
-score_time:[0.06122613 0.05662394 0.05545545 0.0543704  0.05569577]
-estimator:[RandomForestClassifier(), RandomForestClassifier(), RandomForestClassifier(), RandomForestClassifier(), RandomForestClassifier()]
 test_accuracy:[0.99864734 0.99864708 0.99845381 0.99748744 0.99864708]
 train_accuracy:[1. 1. 1. 1. 1.]
 test_precision:[0.99919775 0.99939807 0.99899739 0.99959807 0.99899759]
