@@ -1,0 +1,17 @@
+strict digraph  {
+distance;
+isWeekDay;
+duration;
+isHoliday;
+speed;
+driver_proximity;
+fulfilled;
+distance -> duration  [origin=unknown];
+isWeekDay -> speed  [origin=unknown];
+duration -> fulfilled  [origin=unknown];
+isHoliday -> speed  [origin=unknown];
+isHoliday -> fulfilled  [origin=unknown];
+speed -> distance  [origin=learned, weight="17.002225711255335"];
+speed -> fulfilled  [origin=learned, weight="-31.213968329752866"];
+driver_proximity -> distance  [origin=unknown];
+}
