@@ -100,7 +100,7 @@
 ## Getting Started
 
 ## Articles
-- [Medium Article](https://medium.com/)
+- [Medium Article](https://medium.com/dev-genius/causal-inference-modelling-8887c38ece05)
 
 ### Prerequisites
 
